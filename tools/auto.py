@@ -1,19 +1,18 @@
 import os
 import argparse
 import logging
+import numpy as np
 import sys
 sys.path.insert(0, '.')
-import numpy as np
-
 
 import volkstuner.engine as ag
+from volkstuner.utils import Config
+from volkstuner.utils import build_logger
 #import autogluon as ag
 #print(ag.__file__)
 
 
-from volkstuner.trainvals import get_trainval
-from volkstuner.utils import Config
-from volkstuner.utils import build_logger
+from jobs import get_job
 
 
 def parse_args():
@@ -29,17 +28,12 @@ def main(cfg):
 
     build_logger(cfg['logger'])
 
-    #if cfg['debug']:
-    #    logging.basicConfig(level=logging.DEBUG)
-    #else:
-    #    logging.basicConfig(level=logging.INFO)
-
-    trainval = get_trainval(cfg['trainval'])
+    job = get_job(cfg['job'])
 
     # create searcher and scheduler
     extra_node_ips = []
     if args['scheduler'] == 'hyperband':
-        myscheduler = ag.scheduler.HyperbandScheduler(trainval,
+        myscheduler = ag.scheduler.HyperbandScheduler(job,
                                                       resource={'num_cpus': args['num_cpus'], 'num_gpus': args['num_gpus']},
                                                       num_trials=args['num_trials'],
                                                       checkpoint=args['checkpoint'],
@@ -47,7 +41,7 @@ def main(cfg):
                                                       max_t=args['epochs'], grace_period=args['epochs']//4,
                                                       dist_ip_addrs=extra_node_ips)
     elif args['scheduler'] == 'fifo':
-        myscheduler = ag.scheduler.FIFOScheduler(trainval,
+        myscheduler = ag.scheduler.FIFOScheduler(job,
                                                  resource={'num_cpus': args['num_cpus'], 'num_gpus': args['num_gpus']},
                                                  num_trials=args['num_trials'],
                                                  checkpoint=args['checkpoint'],

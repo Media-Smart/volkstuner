@@ -152,7 +152,7 @@ class NodeResourceManager(object):
         self.CPU_QUEUE = Queue()
         self.GPU_QUEUE = Queue()
         res_conf = None
-        res_conf_fp = os.path.expanduser('~/.autogluon/resource.yml')
+        res_conf_fp = os.path.expanduser('~/.volkstuner/resource.yml')
         if os.path.isfile(res_conf_fp):
             with open(res_conf_fp, 'r') as fd:
                 res_conf = yaml.safe_load(fd)

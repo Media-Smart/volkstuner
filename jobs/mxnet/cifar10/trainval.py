@@ -85,7 +85,7 @@ def _trainval(net, ctx, train_data, val_data, lr_scheduler, optimizer, batch_siz
         train_loss /= batch_size * num_batch
         name, acc = train_metric.get()
         name, val_acc = test(net, ctx, val_data)
-        reporter(epoch=epoch, accuracy=val_acc)
+        reporter(epoch=epoch, accuracy=val_acc, train_acc=acc)
         train_history.update([1-acc, 1-val_acc])
         train_history.plot(save_path='%s/train_history.png'%save_dir)
 
@@ -93,8 +93,8 @@ def _trainval(net, ctx, train_data, val_data, lr_scheduler, optimizer, batch_siz
             best_val_score = val_acc
             #net.save_parameters('%s/%.4f-cifar-%s-%d-best.params'%(save_dir, best_val_score, args.model, epoch))
 
-        logging.info('[Epoch %d] train=%f val=%f loss=%f time: %f' %
-            (epoch, acc, val_acc, train_loss, time.time()-tic))
+        #logging.info('[Epoch %d] train=%f val=%f loss=%f time: %f' %
+        #    (epoch, acc, val_acc, train_loss, time.time()-tic))
 
         if save_period and save_dir and (epoch + 1) % save_period == 0:
             net.save_parameters('%s/epoch-%d.params'%(save_dir, epoch))
@@ -105,7 +105,7 @@ def _trainval(net, ctx, train_data, val_data, lr_scheduler, optimizer, batch_siz
 
 
 def trainval(args, reporter):
-    print('debug', args, type(args))
+    #print('debug', args, type(args))
 
     classes = 10
     # runtime

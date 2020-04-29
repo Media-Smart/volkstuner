@@ -72,7 +72,7 @@ class FIFOScheduler(TaskScheduler):
 
     def __init__(self, train_fn, args=None, resource=None,
                  searcher=None, search_options=None,
-                 checkpoint='./exp/checkpoint.ag',
+                 checkpoint=None,
                  resume=False, num_trials=None,
                  time_out=None, max_reward=1.0, time_attr='epoch',
                  reward_attr='accuracy', dist_ip_addrs=None):

@@ -54,7 +54,7 @@ class DistStatusReporter(object):
             kwargs['time_this_iter'] = report_time - self._last_report_time
         self._last_report_time = report_time
 
-        logger.debug('Reporting {}'.format(json.dumps(kwargs)))
+        #logger.debug('Reporting {}'.format(json.dumps(kwargs)))
         try:
             self._queue.put(kwargs.copy())
         except RuntimeError:
@@ -124,7 +124,7 @@ class LocalStatusReporter(object):
         self._last_report_time = report_time
 
         self._queue.put(kwargs.copy(), block=True)
-        logger.debug('StatusReporter reporting: {}'.format(json.dumps(kwargs)))
+        #logger.debug('StatusReporter reporting: {}'.format(json.dumps(kwargs)))
 
         self._continue_semaphore.acquire()
         if self._stop.value:

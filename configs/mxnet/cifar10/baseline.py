@@ -1,16 +1,16 @@
 import volkstuner.engine as ag
 
 
-debug = False
+#debug = False
 
 # reuse
-num_epochs=3
+num_epochs=30
 num_gpus = 1
-trainval_name = 'mxnet_cifar10'
-save_dir = 'exp/%s' % trainval_name
+job_name = 'mxnet_cifar10'
+save_dir = 'workdir/%s' % job_name
 
-trainval = dict(
-    name=trainval_name,
+job = dict(
+    name=job_name,
     model=dict(
         name='cifar_resnet20_v1',
         drop_rate=0,
@@ -28,9 +28,9 @@ trainval = dict(
         num_epochs=num_epochs,
         ),
     runtime=dict(
-        batch_size=64,
+        batch_size=128,
         num_gpus=num_gpus,
-        num_workers=2,
+        num_workers=8,
         save_period=1,
         save_dir=save_dir,
         mode='hybrid',
@@ -43,7 +43,7 @@ tuner = dict(
     epochs=num_epochs,
     num_trials=3,
     scheduler='fifo',
-    checkpoint='checkpoint/cifar1.ag',
+    checkpoint='%s/tuner.ag' % save_dir,
     )
 
 logger = dict(
