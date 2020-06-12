@@ -66,7 +66,7 @@ pip install -r requirements.txt
 
 a. Config
 
-Modify some configuration accordingly in the config file like `configs/torch/cifar10/baseline.py`
+Modify some configuration accordingly in the config file like `configs/torch/cifar10/baseline.py`. If you don't want to use all gpus, you can new a file `~/.volkstuner/resource.yml`, then specify the gpus id like `gpu: [2, 3]`.
 
 b. Run
 
@@ -75,6 +75,11 @@ python tools/auto.py configs/torch/cifar10/baseline.py
 ```
 
 Snapshots and logs will be generated at `${volkstuner_root}/workdir`. The best hyperparameters will be stored in logs file. 
+
+## Custom job
+a. Write your job in `jobs` folder, like `jobs/pytorch/cifar10/trainval.py`
+
+b. Define your configuration in `configs` folder, like `configs/torch/cifar10/baseline.py`
 
 ## Credits
 We got a lot of code from [autogluon](https://github.com/awslabs/autogluon).
