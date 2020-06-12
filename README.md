@@ -66,7 +66,7 @@ pip install -r requirements.txt
 
 a. Config
 
-Modify some configuration accordingly in the config file like `configs/torch/cifar10/baseline.py`. If you don't want to use all gpus, you can new a file `~/.volkstuner/resource.yml`, then specify the gpus id like `gpu: [2, 3]`.
+Modify some configuration accordingly in the config file like `configs/torch/cifar10/baseline.py`. If you don't want to use all gpus, you can new a file `~/.volkstuner/resource.yml`, then specify the gpu ids like `gpu: [2, 3]`.
 
 b. Run
 
