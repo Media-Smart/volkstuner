@@ -81,5 +81,9 @@ a. Write your job in `jobs` folder, like `jobs/pytorch/cifar10/trainval.py`
 
 b. Define your configuration in `configs` folder, like `configs/torch/cifar10/baseline.py`
 
+## Contact
+
+This repository is currently maintained by Hongxiang Cai ([@hxcai](http://github.com/hxcai)), Yichao Xiong ([@mileistone](https://github.com/mileistone)).
+
 ## Credits
 We got a lot of code from [autogluon](https://github.com/awslabs/autogluon).
